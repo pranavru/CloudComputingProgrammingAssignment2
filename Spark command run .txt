@@ -1,0 +1,37 @@
+/*
+	* Subject: CS 643 - Cloud Computing
+	* Name: Pranav Ruparelia
+	* UCID: plr22
+	* email: plr22@njit.edu
+*/
+
+** 	To start cluster add SSH on port 22
+	1. Click on the security roles for the master node.
+	2. Click Edit in-bound rules => Add Rule -> SSH -> Port Number = 22
+	3. Select MyIP in the access points and Save the rules
+
+**  Run the SSH command in your terminal, also set up the session by adding credentials in ~/.aws/credentials file
+	1. ssh -i PranavCCASsign.pem hadoop@________________.compute-1.amazonaws.com
+
+**  Once the EMR is running, check the versions by running following commands
+	1. spark-submit --version
+	2. spark-shell
+	3. Update the softwares to the latest version: sudo yum update
+	4. java -version
+	5. pip -V
+	6. python3 -V
+
+**  Check for the files you require and load it locally on the EC2 instance
+	1. aws s3 ls
+	2. This command loads all of you files in /hadoop/home folder: aws s3 cp s3://myprogrambucket . --recursive
+	3. Run this command to check the files are loaded: ls
+
+**  To turn of the Logs for INFO in EC2 spark:
+	1. cd /usr/lib/spark
+	2. ls
+	3. sudo vim conf/log4j.properties: Change the INFO parameter to ERROR and save it 
+
+**  Return back to the root folder and perform spark-submit command to run the Model using command 
+	1. Returns back to the /hadoop/home folder: cd
+	2. Training Model is generated: spark-submit wineQualityModelling.py
+	3. To carry out the predictions and calculate the metrics run: spark-submit wineQualityTestPredictions.py
